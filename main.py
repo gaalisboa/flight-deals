@@ -8,7 +8,12 @@ from notification_manager import NotificationManager
 from flight_data import FlightData
 
 
-SHEETY_ENDPOINT = os.getenv('SHEETY_ENDPOINT')
+flight_search = FlightSearch()
+data_manager = DataManager()
 
-search_tool = FlightSearch()
-print(search_tool.get_destination_code("London"))
+sheety_data = data_manager.get_data()
+
+for row in sheety_data:
+    row['iataCode'] = flight_search.get_destination_code(row['city'])
+
+print(sheety_data)

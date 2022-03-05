@@ -1,3 +1,16 @@
+import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+import requests
+
+SHEETY_ENDPOINT = os.getenv('SHEETY_ENDPOINT')
+
 class DataManager:
-    #This class is responsible for talking to the Google Sheet.
-    pass
+    def __init__(self) -> None:
+        pass
+
+    def get_data(self):
+        data = requests.get(url=SHEETY_ENDPOINT).json()
+        return data['prices']
